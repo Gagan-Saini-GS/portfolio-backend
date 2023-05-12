@@ -28,7 +28,7 @@ mongoose
     console.log("Not connected to database");
   });
 
-const WishSchema = mongoose.Schema({
+const WishSchema = new mongoose.Schema({
   userID: String,
   userName: String,
   wish: String,
