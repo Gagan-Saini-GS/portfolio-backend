@@ -40,6 +40,38 @@ app.get("/", (req, res) => {
   res.json("Hello");
 });
 
+app.post("/wish", (req, res) => {
+  //   console.log("Ready to Wish");
+  const userName = req.body.userName;
+  const wish = req.body.wish;
+
+  const newWish = new Wish({
+    userName: userName,
+    wish: wish,
+  });
+
+  newWish.save();
+
+  res.json("OK");
+});
+
+app.post("/get-wishes", (req, res) => {
+  //   Wish.find({}, (err, wishes) => {
+  //     if (err) {
+  //       console.log(err);
+  //     }
+  //     res.json({ wishes });
+  //   });
+  Wish.find({})
+    .then((wishes) => {
+      //   console.log(wishes.length);
+      res.json({ wishes });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 app.listen(port, () => {
   console.log("Server is running.");
 });
